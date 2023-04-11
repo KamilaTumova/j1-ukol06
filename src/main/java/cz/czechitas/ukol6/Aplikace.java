@@ -12,12 +12,14 @@ public class Aplikace extends JFrame {
 
     private JLabel husyLabel;
     private JLabel kraliciLabel;
-    private JLabel pocethlavLabel;
-    private JLabel pocetnohouLabel;
+    private JLabel pocetHlavLabel;
+    private JLabel pocetNohouLabel;
     private JTextField husyField;
     private JTextField kraliciField;
-    private JTextField pocethlavField;
-    private JTextField pocetnohouField;
+    private JTextField pocetHlavField;
+
+
+    private JTextField pocetNohouField;
 
     private JButton vypocitatButton;
 
@@ -49,6 +51,7 @@ public class Aplikace extends JFrame {
         husyLabel = new JLabel("Husy");
         husyLabel.setDisplayedMnemonic('H');
         husyLabel.setLabelFor(husyField);
+        husyField.setHorizontalAlignment(JTextField.TRAILING);
         add(husyLabel);
         add(husyField);
 
@@ -56,32 +59,32 @@ public class Aplikace extends JFrame {
         kraliciLabel = new JLabel("Králici");
         kraliciLabel.setDisplayedMnemonic('K');
         kraliciLabel.setLabelFor(kraliciField);
+        kraliciField.setHorizontalAlignment(JTextField.TRAILING);
         add(kraliciLabel);
         add(kraliciField);
 
         add(createButtonBar(), "span");
-
         pack();
 
-        getRootPane().setDefaultButton(vypocitatButton);
+        pocetHlavField = new JTextField();
+        pocetHlavLabel = new JLabel("Počet hlav: ");
+        pocetHlavLabel.setEnabled(false);
+        pocetHlavLabel.setLabelFor(pocetHlavField);
+        pocetHlavField.setHorizontalAlignment(JTextField.TRAILING);
+        add(pocetHlavLabel);
+        add(pocetHlavField);
 
+        pocetNohouField = new JTextField();
+        pocetNohouLabel = new JLabel("Počet nohou");
+        pocetNohouLabel.setEnabled(false);
+        pocetNohouLabel.setLabelFor(pocetNohouField);
+        pocetNohouField.setHorizontalAlignment(JTextField.TRAILING);
+        add(pocetNohouLabel);
+        add(pocetNohouField);
+
+        getRootPane().setDefaultButton(vypocitatButton);
         vypocitatButton.addActionListener(this::handleVypocitat);
 
-        pocethlavField = new JTextField();
-        pocethlavLabel = new JLabel("Počet hlav");
-        pocethlavLabel.setEnabled(false);
-        pocethlavLabel.setLabelFor(pocethlavField);
-        add(pocethlavLabel);
-        add(pocethlavField);
-
-        pocetnohouField = new JTextField();
-        pocetnohouLabel = new JLabel("Počet nohou");
-        pocetnohouLabel.setEnabled(false);
-        pocetnohouLabel.setLabelFor(pocetnohouField);
-        add(pocetnohouLabel);
-        add(pocetnohouField);
-
-        JPanel buttonBar = new JPanel(new MigLayout(null, "[right, grow]"));
 
     }
 
@@ -95,6 +98,18 @@ public class Aplikace extends JFrame {
     }
 
     private void handleVypocitat(ActionEvent actionEvent) {
-        // metoda vypoctu
+
+
+        int husy = Integer.parseInt(husyField.getText());
+        int kralici = Integer.parseInt(kraliciField.getText());
+
+        pocetHlavField.setText(Integer.toString(husy + kralici));
+        pocetNohouField.setText(Integer.toString((husy * 2) + (kralici * 4)));
     }
+
+
 }
+
+
+
+
